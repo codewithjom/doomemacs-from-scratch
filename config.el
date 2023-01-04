@@ -327,9 +327,6 @@ List of keybindings (SPC h b b)")
   (setq-default web-mode-attribute-indent-offset 2))
 
 (use-package skewer-mode)
-(use-package prettier
-  :config
-  (prettier-mode t))
 
 (use-package compile
   :custom
