@@ -76,3 +76,5 @@
 (package! clippy)
 (package! minimap)
 (package! olivetti)
+(package! visual-fill-column)
+(package! org-roam)

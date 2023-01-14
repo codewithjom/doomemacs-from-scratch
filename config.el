@@ -108,22 +108,26 @@ List of keybindings (SPC h b b)")
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
 
-(setq doom-theme 'doom-tokyo-night)
+(setq doom-theme 'doom-ayu-dark)
 (map! :leader
       :desc "Load new theme" "h t" #'counsel-load-theme)
 
 (use-package emojify
   :hook (after-init . global-emojify-mode))
 
-(setq doom-font (font-spec :family "Agave Nerd Font" :size 20)
-      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 20)
-      doom-big-font (font-spec :family "Agave Nerd Font" :size 24))
+(setq doom-font (font-spec :family "JetBrains Mono" :weight 'light :size 15)
+      doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 15)
+      doom-big-font (font-spec :family "JetBrains Mono" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
 (custom-set-faces!
   '(font-lock-comment-face :slant italic)
   '(font-lock-keyword-face :slant italic))
+
+(use-package ivy
+  :diminish
+  :bind (("C-s" . swiper)))
 
 (setq ivy-posframe-display-functions-alist
       '((swiper                     . ivy-posframe-display-at-point)
@@ -148,7 +152,20 @@ List of keybindings (SPC h b b)")
        :desc "Ivy push view" "v p" #'ivy-push-view
        :desc "Ivy switch view" "v s" #'ivy-switch-view))
 
-(setq display-line-numbers-type t)
+;; (setq display-line-numbers-type t)
+(column-number-mode)
+
+(dolist (mode '(text-mode-hook
+                prog-mode-hook
+                conf-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 1))))
+
+(dolist (mode '(org-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0) (hl-line-mode -1))))
+
+(dolist (mode '(markdown-mode-hook))
+  (add-hook mode (lambda () (display-line-numbers-mode 0) (hl-line-mode -1))))
+
 (map! :leader
       :desc "Comment or uncomment lines" "TAB TAB" #'comment-line
       (:prefix ("t" . "toggle")
@@ -158,13 +175,13 @@ List of keybindings (SPC h b b)")
        :desc "Toggle truncate lines" "t" #'toggle-truncate-lines))
 
 (custom-set-faces
- '(markdown-header-face ((t (:inherit font-lock-function-name-face :weight bold :family "variable-pitch"))))
- '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.7))))
- '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.6))))
- '(markdown-header-face-3 ((t (:inherit markdown-header-face :height 1.5))))
- '(markdown-header-face-4 ((t (:inherit markdown-header-face :height 1.4))))
- '(markdown-header-face-5 ((t (:inherit markdown-header-face :height 1.3))))
- '(markdown-header-face-6 ((t (:inherit markdown-header-face :height 1.2)))))
+ '(markdown-header-face ((t (:inherit font-lock-function-name-face :weight bold :family "JetBrains Mono"))))
+ '(markdown-header-face-1 ((t (:inherit markdown-header-face :height 1.4))))
+ '(markdown-header-face-2 ((t (:inherit markdown-header-face :height 1.3))))
+ '(markdown-header-face-3 ((t (:inherit markdown-header-face :height 1.2))))
+ '(markdown-header-face-4 ((t (:inherit markdown-header-face :height 1.1))))
+ '(markdown-header-face-5 ((t (:inherit markdown-header-face :height 1.05))))
+ '(markdown-header-face-6 ((t (:inherit markdown-header-face :height 1.05)))))
 
 (setq minimap-window-location 'right)
 (map! :leader
@@ -173,19 +190,73 @@ List of keybindings (SPC h b b)")
 
 (xterm-mouse-mode 1)
 
+(add-hook 'visual-line-mode-hook #'visual-fill-column-mode)
+(setq-default visual-fill-column-center-text t)
+(setq-default visual-fill-column-width 95)
+
 (after! org
   (setq org-directory "~/Documents/org-files/"
         org-default-notes-file (expand-file-name "notes.org" org-directory)
-        org-ellipsis " ▼ "
-        org-superstar-headline-bullets-list '("◉" "●" "○" "◆" "●" "○" "◆")
+        org-ellipsis " ▾"
+        org-hide-emphasis-markers t
+        org-fontify-quote-and-verse-blocks t
+        org-src-tab-acts-natively t
+        org-edit-src-content-indentation 2
+        org-hide-block-startup nil
+        org-src-preserve-indentation nil
+        org-startup-folded 'content
+        org-startup-indented t
+        org-pretty-entities t
+        org-superstar-remove-leading-stars t
+        org-superstar-headline-bullets-list '("◉" "✸" "●" "✸" "●" "✸" "●")
         org-superstar-itembullet-alist '((?+ . ?➤) (?- . ?✦)) ; changes +/- symbols in item lists
         org-log-done 'time
-        org-hide-emphasis-markers t))
+        org-hide-emphasis-markers t)
 
-(custom-set-faces
-  '(org-level-1 ((t (:inherit outline-1 :height 1.4))))
-  '(org-level-2 ((t (:inherit outline-2 :height 1.3))))
-  '(org-level-3 ((t (:inherit outline-3 :height 1.2))))
-  '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
-  '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
-)
+(set-face-attribute 'org-document-title nil :font "JetBrains Mono" :weight 'bold :height 1.0)
+(dolist (face '((org-level-1 . 1.4)
+                (org-level-2 . 1.3)
+                (org-level-3 . 1.2)
+                (org-level-4 . 1.1)
+                (org-level-5 . 1.05)
+                (org-level-6 . 1.05)
+                (org-level-7 . 1.05)
+                (org-level-8 . 1.05)))
+  (set-face-attribute (car face) nil :font "JetBrains Mono" :weight 'medium :height (cdr face))))
+
+;; (custom-set-faces
+;;   '(org-level-1 ((t (:inherit outline-1 :height 1.4))))
+;;   '(org-level-2 ((t (:inherit outline-2 :height 1.3))))
+;;   '(org-level-3 ((t (:inherit outline-3 :height 1.2))))
+;;   '(org-level-4 ((t (:inherit outline-4 :height 1.1))))
+;;   '(org-level-5 ((t (:inherit outline-5 :height 1.0))))
+;; )
+
+(use-package org-roam
+    :ensure t
+    :init
+    (setq org-roam-v2-ack t)
+    :custom
+    (org-roam-directory "~/Documents/org-files/")
+    (org-roam-completion-everywhere t)
+    (org-roam-capture-templates
+     '(("d" "default" plain
+       "%?"
+       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}" "#+title: ${title}\n")
+       :unnarrowed t)
+       ("l" "programming language" plain
+        "* Get Started\n\n- Topic: %?\n- Language: \n\n"
+        :if-new (file+head "${slug}.org" "#+title: ${title}\n")
+        :unnarrowed t)
+       ("b" "book notes" plain
+        "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\n\n"
+        :if-new (file+head "${slug}.org" "#+title: ${title}\n")
+        :unnarrowed t)
+       ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
+        :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}.org" "#+title: ${title}\n#+filetags: Project")
+        :unnarrowed t)))
+    :bind (("C-c n l" . org-roam-buffer-toggle)
+           ("C-c n f" . org-roam-node-find)
+           ("C-c n i" . org-roam-node-insert))
+    :config
+    (org-roam-db-autosync-enable))
