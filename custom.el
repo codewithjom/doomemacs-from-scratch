@@ -4,7 +4,7 @@
  ;; Your init file should contain only one such instance.
  ;; If there is more than one, they won't work right.
  '(package-selected-packages
-   '(consult-org-roam org-present org-roam use-package ligature company vertico react-snippets lsp-tailwindcss ac-emmet phpactor phps-mode html5-schema lsp-ui typescript-mode visual-fill-column prettier))
+   '(diminish consult-org-roam org-present org-roam use-package ligature company vertico react-snippets lsp-tailwindcss ac-emmet phpactor phps-mode html5-schema lsp-ui typescript-mode visual-fill-column prettier))
  '(warning-suppress-types '((emacs) (emacs) (defvaralias)) t))
 (custom-set-faces
  ;; custom-set-faces was added by Custom.

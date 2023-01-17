@@ -78,3 +78,4 @@
 (package! olivetti)
 (package! visual-fill-column)
 (package! org-roam)
+(package! prettier)

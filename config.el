@@ -46,7 +46,7 @@ List of keybindings (SPC h b b)")
   ;;(setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
   (setq dashboard-startup-banner "~/.doom.d/doom-emacs-dash.png")  ;; use custom image as banner
   (setq dashboard-center-content t) ;; set to 't' for centered content
-  (setq dashboard-items '((recents . 5)))
+  (setq dashboard-items '((recents . 10)))
   :config
   (dashboard-setup-startup-hook)
   (dashboard-modify-heading-icons '((recents . "file-text")
@@ -108,7 +108,7 @@ List of keybindings (SPC h b b)")
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
 
-(setq doom-theme 'doom-ayu-dark)
+(setq doom-theme 'doom-tokyo-night)
 (map! :leader
       :desc "Load new theme" "h t" #'counsel-load-theme)
 
@@ -136,7 +136,7 @@ List of keybindings (SPC h b b)")
         (counsel-esh-history        . ivy-posframe-display-at-window-center)
         (counsel-describe-function  . ivy-display-function-fallback)
         (counsel-describe-variable  . ivy-display-function-fallback)
-        (counsel-find-file          . ivy-display-function-fallback)
+        (counsel-find-file          . ivy-posframe-display-at-frame-bottom-window-center)
         (counsel-recentf            . ivy-display-function-fallback)
         (counsel-register           . ivy-posframe-display-at-frame-bottom-window-center)
         (dmenu                      . ivy-posframe-display-at-frame-top-center)
@@ -208,21 +208,21 @@ List of keybindings (SPC h b b)")
         org-startup-indented t
         org-pretty-entities t
         org-superstar-remove-leading-stars t
-        org-superstar-headline-bullets-list '("◉" "✸" "●" "✸" "●" "✸" "●")
+        org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")
         org-superstar-itembullet-alist '((?+ . ?➤) (?- . ?✦)) ; changes +/- symbols in item lists
         org-log-done 'time
         org-hide-emphasis-markers t)
 
-(set-face-attribute 'org-document-title nil :font "JetBrains Mono" :weight 'bold :height 1.0)
-(dolist (face '((org-level-1 . 1.4)
-                (org-level-2 . 1.3)
-                (org-level-3 . 1.2)
-                (org-level-4 . 1.1)
-                (org-level-5 . 1.05)
-                (org-level-6 . 1.05)
-                (org-level-7 . 1.05)
-                (org-level-8 . 1.05)))
-  (set-face-attribute (car face) nil :font "JetBrains Mono" :weight 'medium :height (cdr face))))
+(set-face-attribute 'org-document-title nil :font "Iosevka Aile" :weight 'bold :height 1.0)
+(dolist (face '((org-level-1 . 1.3)
+                (org-level-2 . 1.2)
+                (org-level-3 . 1.1)
+                (org-level-4 . 1.05)
+                (org-level-5 . 1.0)
+                (org-level-6 . 1.0)
+                (org-level-7 . 1.0)
+                (org-level-8 . 1.0)))
+  (set-face-attribute (car face) nil :font "Iosevka Aile" :weight 'medium :height (cdr face))))
 
 ;; (custom-set-faces
 ;;   '(org-level-1 ((t (:inherit outline-1 :height 1.4))))
@@ -260,3 +260,7 @@ List of keybindings (SPC h b b)")
            ("C-c n i" . org-roam-node-insert))
     :config
     (org-roam-db-autosync-enable))
+
+(use-package prettier
+  :config
+  (prettier-mode t))
