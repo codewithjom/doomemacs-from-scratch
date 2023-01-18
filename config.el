@@ -4,6 +4,10 @@
 ;; sync' after modifying this file!
 
 (setq inhibit-startup-message t)
+(setq mouse-wheel-scroll-amount '(1 ((shift) . 1))) ;; one line at a time
+(setq mouse-wheel-progressive-speed nil) ;; don't accelerate scrolling
+(setq mouse-wheel-follow-mouse 't) ;; scroll window under mouse
+(setq scroll-step 1) ;; keyboard scroll one line at a time
 
 (set-frame-parameter (selected-frame) 'alpha '(95 . 90))
 (add-to-list 'default-frame-alist '(alpha . (95 . 90)))
@@ -55,9 +59,9 @@
 (use-package emojify
   :hook (after-init . global-emojify-mode))
 
-(setq doom-font (font-spec :family "Mononoki" :weight 'regular :size 15)
+(setq doom-font (font-spec :family "BlexMono Nerd Font" :weight 'regular :size 15)
       doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 15)
-      doom-big-font (font-spec :family "Mononoki" :size 24))
+      doom-big-font (font-spec :family "BlexMono Nerd Font" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -152,3 +156,6 @@
 (use-package prettier
   :config
   (prettier-mode t))
+
+(use-package org-appear
+  :hook (org-mode . org-appear-mode))
