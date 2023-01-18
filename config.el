@@ -91,7 +91,7 @@
 (setq-default visual-fill-column-width 95)
 
 (after! org
-  (setq org-directory "~/Documents/org-files/"
+  (setq org-directory "~/org-files/"
         org-default-notes-file (expand-file-name "notes.org" org-directory)
         org-ellipsis " ▾"
         org-hide-emphasis-markers t
@@ -104,7 +104,7 @@
         org-startup-indented t
         org-pretty-entities t
         org-superstar-remove-leading-stars t
-        org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")
+        ;; org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")
         org-superstar-itembullet-alist '((?+ . ?➤) (?- . ?✦)) ; changes +/- symbols in item lists
         org-log-done 'time
         org-hide-emphasis-markers t)
@@ -125,19 +125,19 @@
     :init
     (setq org-roam-v2-ack t)
     :custom
-    (org-roam-directory "~/Documents/org-files/")
+    (org-roam-directory "~/org-files/")
     (org-roam-completion-everywhere t)
     (org-roam-capture-templates
      '(("d" "default" plain
-       "%?"
-       :if-new (file+head "%<%Y%m%d%H%M%S>-${slug}" "#+title: ${title}\n")
-       :unnarrowed t)
+        "%?"
+        :if-new (file+head "${slug}.org" "#+title: ${title}\n")
+        :unnarrowed t)
        ("l" "programming language" plain
         "* Get Started\n\n- Topic: %?\n- Language: \n\n"
         :if-new (file+head "${slug}.org" "#+title: ${title}\n")
         :unnarrowed t)
-       ("b" "book notes" plain
-        "\n* Source\n\nAuthor: %^{Author}\nTitle: ${title}\n\n"
+       ("b" "book" plain
+        "\n#+author: Jom Dollesin\n\n"
         :if-new (file+head "${slug}.org" "#+title: ${title}\n")
         :unnarrowed t)
        ("p" "project" plain "* Goals\n\n%?\n\n* Tasks\n\n** TODO Add initial tasks\n\n* Dates\n\n"
