@@ -3,8 +3,8 @@
 ;; Place your private configuration here! Remember, you do not need to run 'doom
 ;; sync' after modifying this file!
 
-(set-frame-parameter (selected-frame) 'alpha '(95 . 90))
-(add-to-list 'default-frame-alist '(alpha . (95 . 90)))
+;; (set-frame-parameter (selected-frame) 'alpha '(95 . 90))
+;; (add-to-list 'default-frame-alist '(alpha . (95 . 90)))
 (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 (add-to-list 'default-frame-alist '(fullscreen . maximized))
 
@@ -54,9 +54,9 @@
 (use-package emojify
   :hook (after-init . global-emojify-mode))
 
-(setq doom-font (font-spec :family "BlexMono Nerd Font" :weight 'regular :size 15)
-      doom-variable-pitch-font (font-spec :family "Iosevka Aile" :size 15)
-      doom-big-font (font-spec :family "BlexMono Nerd Font" :size 24))
+(setq doom-font (font-spec :family "JetBrains Mono" :weight 'regular :size 14)
+      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 14)
+      doom-big-font (font-spec :family "JetBrains Mono" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
         doom-themes-enable-italic t))
@@ -108,7 +108,7 @@
         org-log-done 'time
         org-hide-emphasis-markers t)
 
-(set-face-attribute 'org-document-title nil :font "Iosevka Aile" :weight 'bold :height 1.0)
+(set-face-attribute 'org-document-title nil :font "JetBrains Mono" :weight 'bold :height 1.0)
 (dolist (face '((org-level-1 . 1.3)
                 (org-level-2 . 1.2)
                 (org-level-3 . 1.1)
@@ -117,7 +117,7 @@
                 (org-level-6 . 1.0)
                 (org-level-7 . 1.0)
                 (org-level-8 . 1.0)))
-  (set-face-attribute (car face) nil :font "Iosevka Aile" :weight 'medium :height (cdr face))))
+  (set-face-attribute (car face) nil :font "JetBrains Mono" :weight 'medium :height (cdr face))))
 
 (use-package org-roam
     :ensure t
