@@ -5,8 +5,10 @@
 
 ;; (set-frame-parameter (selected-frame) 'alpha '(95 . 90))
 ;; (add-to-list 'default-frame-alist '(alpha . (95 . 90)))
-(set-frame-parameter (selected-frame) 'fullscreen 'maximized)
-(add-to-list 'default-frame-alist '(fullscreen . maximized))
+;; (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
+;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
+(add-to-list 'default-frame-alist '(width  . 98))
+(add-to-list 'default-frame-alist '(height . 34))
 
 (use-package dashboard
   :init      ;; tweak dashboard config before loading it
@@ -91,32 +93,25 @@
 
 (after! org
   (setq org-directory "~/org-files/"
-        org-default-notes-file (expand-file-name "notes.org" org-directory)
         org-ellipsis " ▾"
-        org-hide-emphasis-markers t
-        org-fontify-quote-and-verse-blocks t
-        org-src-tab-acts-natively t
-        org-edit-src-content-indentation 2
-        org-hide-block-startup nil
-        org-src-preserve-indentation nil
-        org-startup-folded 'content
-        org-startup-indented t
-        org-pretty-entities t
-        org-superstar-remove-leading-stars t
-        ;; org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")
+        org-startup-folded 'overview
+        org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")
         org-superstar-itembullet-alist '((?+ . ?➤) (?- . ?✦)) ; changes +/- symbols in item lists
         org-log-done 'time
         org-hide-emphasis-markers t)
+  (setq org-agenda-files
+        '("~/org-files/todo.org"
+          "~/org-files/school.org"))
 
-(set-face-attribute 'org-document-title nil :font "JetBrains Mono" :weight 'bold :height 1.0)
-(dolist (face '((org-level-1 . 1.3)
+(set-face-attribute 'org-document-title nil :font "JetBrains Mono" :weight 'bold :height 1.3)
+(dolist (face '((org-level-1 . 1.2)
                 (org-level-2 . 1.2)
-                (org-level-3 . 1.1)
-                (org-level-4 . 1.05)
-                (org-level-5 . 1.0)
-                (org-level-6 . 1.0)
-                (org-level-7 . 1.0)
-                (org-level-8 . 1.0)))
+                (org-level-3 . 1.2)
+                (org-level-4 . 1.2)
+                (org-level-5 . 1.2)
+                (org-level-6 . 1.2)
+                (org-level-7 . 1.2)
+                (org-level-8 . 1.2)))
   (set-face-attribute (car face) nil :font "JetBrains Mono" :weight 'medium :height (cdr face))))
 
 (use-package org-roam
