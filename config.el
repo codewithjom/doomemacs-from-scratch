@@ -7,14 +7,16 @@
 ;; (add-to-list 'default-frame-alist '(alpha . (95 . 90)))
 ;; (set-frame-parameter (selected-frame) 'fullscreen 'maximized)
 ;; (add-to-list 'default-frame-alist '(fullscreen . maximized))
-(add-to-list 'default-frame-alist '(width  . 98))
+(add-to-list 'default-frame-alist '(width  . 85))
 (add-to-list 'default-frame-alist '(height . 34))
 
 (use-package dashboard
-  :init      ;; tweak dashboard config before loading it
+  :ensure t
+  :config      ;; tweak dashboard config before loading it
+  (dashboard-setup-startup-hook)
   (setq dashboard-set-heading-icons t)
   (setq dashboard-set-file-icons t)
-  (setq dashboard-banner-logo-title "")
+  (setq dashboard-banner-logo-title " ")
   ;; (setq dashboard-startup-banner 'logo) ;; use standard emacs logo as banner
   (setq dashboard-startup-banner "~/.doom.d/logo.svg")
   (setq dashboard-center-content 't) ;; set to 't' for centered content
@@ -49,7 +51,7 @@
 (setq delete-by-moving-to-trash t
       trash-directory "~/.local/share/Trash/files/")
 
-(setq doom-theme 'doom-gruvbox)
+(setq doom-theme 'doom-one)
 (map! :leader
       :desc "Load new theme" "h t" #'counsel-load-theme)
 
@@ -96,22 +98,21 @@
         org-ellipsis " ▾"
         org-startup-folded 'overview
         org-superstar-headline-bullets-list '("◉" "○" "●" "○" "●" "○" "●")
-        org-superstar-itembullet-alist '((?+ . ?➤) (?- . ?✦)) ; changes +/- symbols in item lists
         org-log-done 'time
         org-hide-emphasis-markers t)
   (setq org-agenda-files
         '("~/org-files/todo.org"
           "~/org-files/school.org"))
 
-(set-face-attribute 'org-document-title nil :font "JetBrains Mono" :weight 'bold :height 1.3)
-(dolist (face '((org-level-1 . 1.2)
-                (org-level-2 . 1.2)
-                (org-level-3 . 1.2)
-                (org-level-4 . 1.2)
-                (org-level-5 . 1.2)
-                (org-level-6 . 1.2)
-                (org-level-7 . 1.2)
-                (org-level-8 . 1.2)))
+(set-face-attribute 'org-document-title nil :font "JetBrains Mono" :weight 'bold :height 1.1)
+(dolist (face '((org-level-1 . 1.0)
+                (org-level-2 . 1.0)
+                (org-level-3 . 1.0)
+                (org-level-4 . 1.0)
+                (org-level-5 . 1.0)
+                (org-level-6 . 1.0)
+                (org-level-7 . 1.0)
+                (org-level-8 . 1.0)))
   (set-face-attribute (car face) nil :font "JetBrains Mono" :weight 'medium :height (cdr face))))
 
 (use-package org-roam
