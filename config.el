@@ -1,5 +1,5 @@
-(add-to-list 'default-frame-alist '(width  . 85))
-(add-to-list 'default-frame-alist '(height . 34))
+(add-to-list 'default-frame-alist '(width  . 80))
+(add-to-list 'default-frame-alist '(height . 32))
 
 (use-package dashboard
   :ensure t
@@ -49,8 +49,8 @@
 (use-package emojify
   :hook (after-init . global-emojify-mode))
 
-(setq doom-font (font-spec :family "JetBrains Mono" :weight 'regular :size 15)
-      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 15)
+(setq doom-font (font-spec :family "JetBrains Mono" :weight 'regular :size 14)
+      doom-variable-pitch-font (font-spec :family "Ubuntu" :size 14)
       doom-big-font (font-spec :family "JetBrains Mono" :size 24))
 (after! doom-themes
   (setq doom-themes-enable-bold t
@@ -93,6 +93,7 @@
         org-hide-emphasis-markers t)
   (setq org-agenda-files
         '("~/org-files/todo.org"
+          "~/org-files/books.org"
           "~/org-files/school.org"))
 
 (set-face-attribute 'org-document-title nil :font "Agave Nerd Font" :weight 'bold :height 1.3)
