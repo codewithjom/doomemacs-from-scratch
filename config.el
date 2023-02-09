@@ -1,3 +1,6 @@
+(set-frame-parameter (selected-frame) 'alpha '(90 . 90))
+(add-to-list 'default-frame-alist '(alpha . (90 . 90)))
+
 (add-to-list 'default-frame-alist '(width  . 80))
 (add-to-list 'default-frame-alist '(height . 32))
 
@@ -96,15 +99,15 @@
           "~/org-files/books.org"
           "~/org-files/school.org"))
 
-(set-face-attribute 'org-document-title nil :font "Agave Nerd Font" :weight 'bold :height 1.3)
-(dolist (face '((org-level-1 . 1.4)
-                (org-level-2 . 1.4)
-                (org-level-3 . 1.4)
-                (org-level-4 . 1.4)
-                (org-level-5 . 1.4)
-                (org-level-6 . 1.4)
-                (org-level-7 . 1.4)
-                (org-level-8 . 1.4)))
+(set-face-attribute 'org-document-title nil :font "Agave Nerd Font" :weight 'medium :height 1.4)
+(dolist (face '((org-level-1 . 1.3)
+                (org-level-2 . 1.3)
+                (org-level-3 . 1.3)
+                (org-level-4 . 1.3)
+                (org-level-5 . 1.3)
+                (org-level-6 . 1.3)
+                (org-level-7 . 1.3)
+                (org-level-8 . 1.3)))
   (set-face-attribute (car face) nil :font "Agave Nerd Font" :weight 'medium :height (cdr face))))
 
 (use-package org-roam
