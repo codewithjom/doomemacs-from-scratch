@@ -58,3 +58,4 @@
 (package! visual-fill-column)
 (package! org-roam)
 (package! prettier)
+(package! org-present)
